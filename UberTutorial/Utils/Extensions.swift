@@ -11,6 +11,31 @@ import UIKit
 
 extension UIView {
     
+    func inputContainerView(image: String, textField: UITextField) -> UIView {
+        
+        let view = UIView()
+        
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: image)
+        imageView.alpha = 0.87 //Transparency
+        view.addSubview(imageView)
+        imageView.centerY(inView: view)
+        imageView.Anchor(left: view.leftAnchor, paddingLeft: 8, width: 24, height: 24)
+        
+        view.addSubview(textField)
+        textField.centerY(inView: view)
+        textField.Anchor(left: imageView.rightAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingLeft: 8, paddingBottom: 8)
+        
+        
+        let separatorView = UIView()
+        separatorView.backgroundColor = .lightGray
+        view.addSubview(separatorView)
+        separatorView.Anchor(left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingLeft: 8, height: 0.75)
+        
+        return view
+    }
+    
+    
     func Anchor(top: NSLayoutYAxisAnchor? = nil,
                 left: NSLayoutXAxisAnchor? = nil,
                 bottom: NSLayoutYAxisAnchor? = nil,
@@ -63,6 +88,26 @@ extension UIView {
         
     }
     
+    
+    
+}
+
+extension UITextField {
+    
+    func TextField(withPlaceholder placeholder: String, isSecureTextEntry: Bool) -> UITextField{
+        
+        let textField = UITextField()
+        textField.borderStyle = .none
+        textField.font = UIFont.systemFont(ofSize: 16)
+        textField.textColor = .white
+        textField.isSecureTextEntry = isSecureTextEntry
+        textField.keyboardAppearance = .dark
+        textField.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [NSAttributedString.Key.foregroundColor : UIColor.lightGray])
+        
+        
+        return textField
+        
+    }
     
     
     

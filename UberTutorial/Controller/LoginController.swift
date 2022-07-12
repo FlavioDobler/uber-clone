@@ -22,44 +22,26 @@ private let titleLabel : UILabel = {
 
 
 private  var emailContainerView : UIView = {
-    let view = UIView()
-   
-   
-    let imageView = UIImageView()
-    imageView.image = UIImage(named: "ic_mail_outline_white_2x")
-    imageView.alpha = 0.87 //Transparency
-    view.addSubview(imageView)
-    imageView.centerY(inView: view)
-    imageView.Anchor(left: view.leftAnchor, paddingLeft: 8, width: 24, height: 24)
-    
-    view.addSubview(emailTextField)
-    emailTextField.centerY(inView: view)
-    emailTextField.Anchor(left: imageView.rightAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingLeft: 8, paddingBottom: 8)
-    
-    let separatorView = UIView()
-    separatorView.backgroundColor = .lightGray
-    view.addSubview(separatorView)
-    separatorView.Anchor(left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingLeft: 8, height: 0.75)
-    
-    
+    let view = UIView().inputContainerView(image: "ic_mail_outline_white_2x", textField: emailTextField)
+    return view
+}()
+
+private  var passwordContainerView : UIView = {
+    let view = UIView().inputContainerView(image: "ic_lock_outline_white_2x", textField: passwordTextField)
     return view
 }()
 
 
-
-
 private let emailTextField : UITextField = {
-    let textField = UITextField()
-    textField.borderStyle = .none
-    textField.font = UIFont.systemFont(ofSize: 16)
-    textField.textColor = .white
-    textField.keyboardAppearance = .dark
-    textField.attributedPlaceholder = NSAttributedString(string: "Email", attributes: [NSAttributedString.Key.foregroundColor : UIColor.lightGray])
-    
-    
-    
-    return textField
+    return UITextField().TextField(withPlaceholder: "Email",
+                                   isSecureTextEntry: false)
 }()
+
+private let passwordTextField : UITextField = {
+    return UITextField().TextField(withPlaceholder: "Password",
+                                   isSecureTextEntry: true)
+}()
+
 
 // MARK: - Lifecycle
 
@@ -79,6 +61,9 @@ class LoginController : UIViewController {
         
         view.addSubview(emailContainerView)
         emailContainerView.Anchor(top: titleLabel.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 40, paddingLeft: 16 , paddingRight: 16 , height: 50 )
+        
+        view.addSubview(passwordContainerView)
+        passwordContainerView.Anchor(top: emailContainerView.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 16, paddingLeft: 16 , paddingRight: 16 , height: 50 )
         
         
     }
